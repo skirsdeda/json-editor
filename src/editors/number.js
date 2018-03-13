@@ -32,6 +32,10 @@ JSONEditor.defaults.editors.number = JSONEditor.defaults.editors.string.extend({
     if (!this.dependenciesFulfilled) {
       return undefined;
     }
-    return this.value===''?undefined:this.value*1;
+    if (this.value === "" || typeof this.value === "undefined") {
+      // allow empty value (don't force convert to zero)
+      return undefined;
+    }
+    return this.value * 1;
   }
 });
