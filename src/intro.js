@@ -1,4 +1,5 @@
-/*! JSON Editor v0.7.28 - JSON Schema -> HTML Editor
+/*! JSON Editor v1.0.0-alpha1 - JSON Schema -> HTML Editor
+ * From https://github.com/skirsdeda/json-editor/
  * By Jeremy Dorn - https://github.com/jdorn/json-editor/
  * Released under the MIT license
  *
