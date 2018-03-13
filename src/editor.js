@@ -442,8 +442,11 @@ JSONEditor.AbstractEditor = Class.extend({
     this.parent = null;
   },
   getDefault: function() {
-    if(this.schema["default"]) return this.schema["default"];
-    if(this.schema["enum"]) return this.schema["enum"][0];
+    if (this.schema["default"]) return this.schema["default"];
+    if (this.schema["enum"]) {
+      if (this.isRequired()) return this.schema["enum"][0];
+      return undefined;
+    }
     
     var type = this.schema.type || this.schema.oneOf;
     if(type && Array.isArray(type)) type = type[0];
@@ -451,9 +454,9 @@ JSONEditor.AbstractEditor = Class.extend({
     if(type && Array.isArray(type)) type = type[0];
     
     if(typeof type === "string") {
-      if(type === "number") return 0.0;
+      if(type === "number") return undefined;
       if(type === "boolean") return false;
-      if(type === "integer") return 0;
+      if(type === "integer") return undefined;
       if(type === "string") return "";
       if(type === "object") return {};
       if(type === "array") return [];

@@ -42,6 +42,7 @@ JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
     return Math.min(12,Math.max(longest_text/7,2));
   },
   typecast: function(value) {
+    if(typeof value === "undefined") return undefined;
     if(this.schema.type === "boolean") {
       return !!value;
     }
