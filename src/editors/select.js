@@ -15,7 +15,7 @@ JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
     this.input.value = this.enum_options[this.enum_values.indexOf(sanitized)];
     if(this.select2) {
       if(this.select2v4)
-        this.select2.val(this.input.value).trigger("change"); 
+        this.select2.val(this.input.value).trigger("change");
       else
         this.select2.select2('val',this.input.value);
     }
@@ -262,7 +262,10 @@ JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
           var items = [];
           // Static list of items
           if(Array.isArray(this.enumSource[i].source)) {
-            items = this.enumSource[i].source;
+            if (!this.enumSource[i].onWatch ||
+                this.enumSource[i].onWatchValue === vars[this.enumSource[i].onWatch]) {
+              items = this.enumSource[i].source;
+            }
           // A watched field
           } else {
             items = vars[this.enumSource[i].source];
@@ -339,7 +342,7 @@ JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
       // Otherwise, set the value to the first select option
       else {
         this.input.value = select_options[0];
-        this.value = this.typecast(select_options[0] || "");  
+        this.value = this.typecast(select_options[0] || "");
         if(this.parent) this.parent.onChildEditorChange(this);
         else this.jsoneditor.onChange();
         this.jsoneditor.notifyWatchers(this.path);
