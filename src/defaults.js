@@ -315,3 +315,7 @@ JSONEditor.defaults.resolvers.unshift(function(schema) {
   // If this schema uses `oneOf` or `anyOf`
   if(schema.oneOf || schema.anyOf) return "multiple";
 });
+// bare select2 with no value sanitizing (let select2 do it's job, possibly with remote data source
+JSONEditor.defaults.resolvers.unshift(function(schema) {
+  if(schema.select2) return "select2";
+});
